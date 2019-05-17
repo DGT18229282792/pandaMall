@@ -23,7 +23,6 @@
                 </dd>
               </dl>
             </div>
-
             <!-- search result accessories list -->
             <div class="accessory-list-wrap">
               <div class="accessory-list col-4">
@@ -195,11 +194,7 @@
                   this.getGoodsList(true);
                 }, 500);
             },
-            addCart(productId){
-                //这里必须使用es6语法，箭头函数，因为es6中this是指定的，不会指向windows
-                setTimeout(()=>{
-                 this.openNotification()
-                },1000)
+            addCart(productId){              
                 axios.post("/goods/addCart",{
                   productId:productId
                 }).then((res)=>{
@@ -207,9 +202,12 @@
                     if(res.status==0){
                         this.mdShowCart = true;
                         this.$store.commit("updateCartCount",1);
+                         //这里必须使用es6语法，箭头函数，因为es6中this是指定的，不会指向window
+                        setTimeout(()=>{
+                        this.openNotification()
+                        },1000)
                     }else{
                         this.mdShow = true;
-                        
                     }
                 });
             },
