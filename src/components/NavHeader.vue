@@ -205,6 +205,7 @@
                       this.errorTip = true;
                     }
                 });
+                this.openNotificationWithIcon2('success')
             },
             logOut(){
                 axios.post("/users/logout").then((response)=>{
@@ -213,13 +214,29 @@
                         this.$store.commit("updateUserInfo",'');
                     }
                 })
+                this.openNotificationWithIcon('warning')
             },
             getCartCount(){
                 axios.get("/users/getCartCount").then((response)=>{
                     let res = response.data;
                     this.$store.commit("initCartCount",res.result);
                 });
-            }
+            },
+            //提示信息
+            openNotificationWithIcon (type) {
+            this.$notification[type]({
+              message: '通知',
+              description: '已退出登录',
+              duration:2
+            });
+          },
+           openNotificationWithIcon2 (type) {
+            this.$notification[type]({
+              message: '通知',
+              description: '成功登录',
+              duration:2
+            });
+          },
         }
     }
 </script>

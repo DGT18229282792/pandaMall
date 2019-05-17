@@ -209,6 +209,7 @@
                         this.$store.commit("updateCartCount",1);
                     }else{
                         this.mdShow = true;
+                        
                     }
                 });
             },
@@ -232,6 +233,13 @@
                 description: '购物车里新添了一件宝贝！',
                 // icon: <a-icon type="smile" style="color: #108ee9"></a-icon>,
                 duration:2
+              });
+            },
+            //提示信息
+            openNotificationWithIcon (type) {
+              this.$notification[type]({
+                message: 'Notification Title',
+                description: 'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
               });
             },
         }
