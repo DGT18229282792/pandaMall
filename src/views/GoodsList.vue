@@ -49,6 +49,7 @@
                 <img src="./../assets/loading-spinning-bubbles.svg" v-show="loading">
               </div>
             </div>
+
           </div>
         </div>
       </div>
@@ -77,8 +78,6 @@
         <a-back-top>
           <div class="ant-back-top-inner">UP</div>
         </a-back-top>
-        <strong style="color: #1088e9"> blue </strong>
-        button.
       </div>
       <nav-footer></nav-footer>
     </div>
@@ -197,6 +196,10 @@
                 }, 500);
             },
             addCart(productId){
+                //这里必须使用es6语法，箭头函数，因为es6中this是指定的，不会指向windows
+                setTimeout(()=>{
+                 this.openNotification()
+                },1000)
                 axios.post("/goods/addCart",{
                   productId:productId
                 }).then((res)=>{
@@ -221,7 +224,16 @@
               this.filterBy=false;
               this.overLayFlag=false;
               this.mdShowCart = false;
-            }
+            },
+            //加入购物车成功后的消息提示
+             openNotification () {
+              this.$notification.open({
+                message: '通知',
+                description: '购物车里新添了一件宝贝！',
+                // icon: <a-icon type="smile" style="color: #108ee9"></a-icon>,
+                duration:2
+              });
+            },
         }
     }
 </script>
